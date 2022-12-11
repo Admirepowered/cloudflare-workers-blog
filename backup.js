@@ -95,6 +95,80 @@ async function handle(e){
 		return a;
     
     	}
+	if (pathname=="/"){
+        var method = e.method;
+        if (method=="POST")return fetch("https://telegraph-image-bqx.pages.dev/");
+    }
+
+    if (pathname.startsWith("/upload") || pathname.startsWith("/_nuxt")|| pathname.startsWith("/bg.svg")||pathname.startsWith("/api/bing")|| pathname.startsWith("/index.html")) {
+
+		var qury = kk.split("/")[3];
+		var a = new URL(e.url);
+		var method = e.method;
+		//var request_headers = e.headers;
+        //
+		// /_nuxt/
+		var url="https://telegraph-image-bqx.pages.dev/"+qury;
+		//return new Response(JSON.stringify({method,url,a,pathname,path,kk,qury}));
+		if (method=="POST"){
+			//const postdata =await JSON.stringify(e.json());
+            //var request_headers= e.headers;
+			//var postdata = readRequestBody(e);
+            var request_headers= e.headers;
+		    var new_request_headers = new Headers(request_headers);
+            var postdata= e.body;
+			//return new Response(postdata);
+			var a = fetch(url, {
+			method: method,
+			body: postdata,
+            headers: new_request_headers
+			});
+            return a;
+			
+		}else{
+        //var request_headers= e.headers;
+		//var new_request_headers = new Headers(request_headers);
+        //return new Response(JSON.stringify({method,url}));
+        var url="https://telegraph-image-bqx.pages.dev/"+pathname;
+        if (pathname=="/upload"){return new Response(`<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script><script>
+function bb(){
+var form = $('<form method="post" action="https://blog.admirecn.de/" target="_blank"></form>');
+form.append('<input type="hidden" name="path" value="123">');$(document.body).append(form);form.submit();}
+</script>
+<button onclick="bb()">Click ME</button>`,{
+
+            headers:{
+                "content-type":"text/html"
+            }
+        })}
+        //var a = 
+		return fetch(url, {
+			method: method//,
+			//headers: new_request_headers
+		}).then(response=>{
+
+            return new Response(response.body,{
+
+            headers:{
+                "content-type":"application/javascript"
+            }
+        });
+        });
+		}
+		//var a =fetch(url);
+        //https://raw.githubusercontent.com/Admirepowered/cdn/master/speedownload/10.png
+        //var ret=a.body;
+        
+        //return a;
+		return new Response(a.body,{
+
+            headers:{
+                "content-type":"application/javascript"
+            }
+        });
+		
+    
+    }
 	
 	if (pathname.startsWith("/comment") || pathname=="/article") {
 		//var qury = kk.stringsub(path.indexOf("/",5));
