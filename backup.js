@@ -91,7 +91,7 @@ async function handle(e){
 	}
 	
 	
-	if (pathname.startsWith("/comment")) {
+	if (pathname.startsWith("/comment") || pathname=="/article") {
 		//var qury = kk.stringsub(path.indexOf("/",5));
 		var qury = kk.split("/")[3];
 		var a = new URL(e.url);
