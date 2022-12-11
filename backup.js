@@ -89,7 +89,12 @@ async function handle(e){
 		  );
 		
 	}
-	
+	   if (pathname.startsWith("/file")) {
+       		var url="https://telegra.ph/"+pathname
+		var a =fetch(url);
+		return a;
+    
+    	}
 	
 	if (pathname.startsWith("/comment") || pathname=="/article") {
 		//var qury = kk.stringsub(path.indexOf("/",5));
